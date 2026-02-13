@@ -25,8 +25,9 @@ def list():
     data = pd.read_csv('NYPD_Hate_Crimes_20260213.csv')
     
     # filter the data
-    data = data[data[filterby].astype(str).str.lower() == str(filtervalue).lower()]
-    if isinstance(data,str):
+    data = filter_by_value(data, filterby, filtervalue)
+
+    if isinstance(data, tuple):  
         return data
 
     # applying the limit and offset
