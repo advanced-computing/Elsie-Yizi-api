@@ -11,7 +11,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.get("/hatecrimes")
+@app.get("/api/list")
 def list():
     
     # Get the query parameters
@@ -26,8 +26,7 @@ def list():
     
     # filter the data
     data = filter_by_value(data, filterby, filtervalue)
-
-    if isinstance(data, tuple):  
+    if isinstance(data, tuple):
         return data
 
     # applying the limit and offset
@@ -42,15 +41,12 @@ def list():
 def filter_by_value(data, filterby, filtervalue):
     if not filterby:
         return data
-
     if filterby not in data.columns:
         return "Invalid filterby column", 400
-
     if filtervalue is None:
         return "Missing filtervalue", 400
 
-    data = data[data[filterby].astype(str).str.lower() == str(filtervalue).lower()]
-    return data
+    return data[data[filterby].astype(str).str.lower() == str(filtervalue).lower()]
 
 def apply_limit_offset(data,limit,offset):
     return data.iloc[offset:offset+limit]
