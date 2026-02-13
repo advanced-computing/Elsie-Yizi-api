@@ -38,15 +38,19 @@ def list():
     return data
 
 
-def filter_by_value(data,filterby,filtervalue):
+def filter_by_value(data, filterby, filtervalue):
 
     if filterby:
+        if filterby not in data.columns:
+            return "Invalid filterby column", 400
+
         if filtervalue is None:
-            return "Invalid filtervalue"
-        elif filterby not in data.columns:
-            return "Invalid filterby column"
-        else:
-            data = data[data[filterby] == int(filtervalue)]
+            return "Missing filtervalue", 400
+
+        data = data[
+            data[filterby].astype(str).str.lower() == str(filtervalue).lower()
+        ]
+
     return data
 
 def apply_limit_offset(data,limit,offset):
