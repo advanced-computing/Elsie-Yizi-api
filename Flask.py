@@ -40,18 +40,16 @@ def list():
 
 
 def filter_by_value(data, filterby, filtervalue):
+    if not filterby:
+        return data
 
-    if filterby:
-        if filterby not in data.columns:
-            return "Invalid filterby column", 400
+    if filterby not in data.columns:
+        return "Invalid filterby column", 400
 
-        if filtervalue is None:
-            return "Missing filtervalue", 400
+    if filtervalue is None:
+        return "Missing filtervalue", 400
 
-        data = data[
-            data[filterby].astype(str).str.lower() == str(filtervalue).lower()
-        ]
-
+    data = data[data[filterby].astype(str).str.lower() == str(filtervalue).lower()]
     return data
 
 def apply_limit_offset(data,limit,offset):
