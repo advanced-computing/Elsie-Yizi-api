@@ -13,7 +13,7 @@ This is just a friendly welcome to the API.
 
 ## List Hate Crime Records
 - Method: GET
-- Path: ```/hatecrimes```
+- Path: ```/api/list```
 - Query parameters:
     - format: ```json``` or ```csv```
     - borough (optional): Patrol Borough Name
