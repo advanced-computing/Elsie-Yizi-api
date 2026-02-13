@@ -11,7 +11,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.get("/api/list")
+@app.get("/hatecrimes")
 def list():
     
     # Get the query parameters
